@@ -18,13 +18,11 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import library.Main;
 
-public class BooksOverViewController {
+public class BooksOverViewController implements IViewController {
 	@FXML
 	private TableView<Person> personTable;
 	@FXML
 	private TableColumn<Person, String> firstNameColumn;
-	@FXML
-	private TableColumn<Person, String> lastNameColumn;
 
 	@FXML
 	private Label firstNameLabel;
@@ -63,7 +61,7 @@ public class BooksOverViewController {
 
 		preJava8();
 		// Clear person details.
-		showPersonDetails(null);
+		showDetails(null);
 
 		// Listen for selection changes and show the person details when
 		// changed.
@@ -71,7 +69,7 @@ public class BooksOverViewController {
 				.getSelectionModel()
 				.selectedItemProperty()
 				.addListener(
-						(observable, oldValue, newValue) -> showPersonDetails(newValue));
+						(observable, oldValue, newValue) -> showDetails(newValue));
 
 	}
 
@@ -86,15 +84,16 @@ public class BooksOverViewController {
 					}
 				});
 
-		lastNameColumn
-				.setCellValueFactory(new Callback<CellDataFeatures<Person, String>, ObservableValue<String>>() {
-
-					@Override
-					public ObservableValue<String> call(
-							CellDataFeatures<Person, String> param) {
-						return param.getValue().lastNameProperty();
-					}
-				});
+		// lastNameColumn
+		// .setCellValueFactory(new Callback<CellDataFeatures<Person, String>,
+		// ObservableValue<String>>() {
+		//
+		// @Override
+		// public ObservableValue<String> call(
+		// CellDataFeatures<Person, String> param) {
+		// return param.getValue().lastNameProperty();
+		// }
+		// });
 	}
 
 	/**
@@ -109,7 +108,8 @@ public class BooksOverViewController {
 		personTable.setItems(mainApp.getPersonData());
 	}
 
-	private void showPersonDetails(Person person) {
+	public void showDetails(Object obj) {
+		Person person = (Person) obj;
 		if (person != null) {
 			// Fill the labels with info from the person object.
 			firstNameLabel.setText(person.getFirstName());
@@ -135,7 +135,7 @@ public class BooksOverViewController {
 	 * Called when the user clicks on the delete button.
 	 */
 	@FXML
-	private void handleDeletePerson() {
+	public void delete() {
 		int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			personTable.getItems().remove(selectedIndex);
@@ -156,7 +156,7 @@ public class BooksOverViewController {
 	 * details for a new person.
 	 */
 	@FXML
-	private void handleNewPerson() {
+	public void add() {
 		Person tempPerson = new Person();
 		boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
 		if (okClicked) {
@@ -169,13 +169,13 @@ public class BooksOverViewController {
 	 * details for the selected person.
 	 */
 	@FXML
-	private void handleEditPerson() {
+	public void edit() {
 		Person selectedPerson = personTable.getSelectionModel()
 				.getSelectedItem();
 		if (selectedPerson != null) {
 			boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
 			if (okClicked) {
-				showPersonDetails(selectedPerson);
+				showDetails(selectedPerson);
 			}
 
 		} else {

@@ -18,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import library.Main;
 
-public class PersonOverviewController {
+public class PersonOverviewController implements IViewController {
 	@FXML
 	private TableView<Person> personTable;
 	@FXML
@@ -61,12 +61,12 @@ public class PersonOverviewController {
 
 		preJava8();
 		// Clear person details.
-		showPersonDetails(null);
+		showDetails(null);
 
 		// Listen for selection changes and show the person details when
 		// changed.
 		personTable.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
+				.addListener((observable, oldValue, newValue) -> showDetails(newValue));
 
 	}
 
@@ -100,9 +100,10 @@ public class PersonOverviewController {
 		personTable.setItems(mainApp.getPersonData());
 	}
 
-	private void showPersonDetails(Person person) {
-		if (person != null) {
+	public void showDetails(Object obj) {
+		if (obj != null) {
 			// Fill the labels with info from the person object.
+			Person person = (Person)obj;
 			firstNameLabel.setText(person.getFirstName());
 			lastNameLabel.setText(person.getLastName());
 			streetLabel.setText(person.getStreet());
@@ -126,7 +127,7 @@ public class PersonOverviewController {
 	 * Called when the user clicks on the delete button.
 	 */
 	@FXML
-	private void handleDeletePerson() {
+	public void delete() {
 		int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			personTable.getItems().remove(selectedIndex);
@@ -147,7 +148,7 @@ public class PersonOverviewController {
 	 * details for a new person.
 	 */
 	@FXML
-	private void handleNewPerson() {
+	public void add() {
 		Person tempPerson = new Person();
 		boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
 		if (okClicked) {
@@ -160,12 +161,12 @@ public class PersonOverviewController {
 	 * details for the selected person.
 	 */
 	@FXML
-	private void handleEditPerson() {
+	public void edit() {
 		Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
 		if (selectedPerson != null) {
 			boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
 			if (okClicked) {
-				showPersonDetails(selectedPerson);
+				showDetails(selectedPerson);
 			}
 
 		} else {
