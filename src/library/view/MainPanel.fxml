@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.MainPanelController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="150.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="books" mnemonicParsing="false" onAction="#loadBooks" onMouseClicked="#setBookClicked" prefHeight="50.0" prefWidth="200.0" text="View Books">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="users" mnemonicParsing="false" onAction="#loadBooks" onMouseClicked="#setUserClicked" prefHeight="50.0" prefWidth="200.0" text="Users" />
+            <Button fx:id="members" mnemonicParsing="false" onAction="#loadBooks" onMouseClicked="#setMemberClicked" prefHeight="50.0" prefWidth="200.0" text="Members" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
