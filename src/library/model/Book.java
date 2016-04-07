@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Book implements Serializable  {
-	/**
-	 *
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String title;
 	private String ISBN;
@@ -40,13 +38,13 @@ public class Book implements Serializable  {
 		ISBN = iSBN;
 	}
 
-//	public List<Author> getAuthor() {
-//		return author;
-//	}
-//
-//	public void setAuthor(List<Author> author) {
-//		this.author = author;
-//	}
+	public List<Author> getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(List<Author> author) {
+		this.author = author;
+	}
 
 	public String getCopyNo() {
 		return copyNo;
