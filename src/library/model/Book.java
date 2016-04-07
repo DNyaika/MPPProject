@@ -1,4 +1,4 @@
-package library.view;
+package library.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Book implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String title;
 	private String ISBN;
-	//private List<Author> author;
+	private List<Author> author;
 	private String copyNo;
 	private String numOfDays;
 
