@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import library.view.IViewController;
 import library.view.Person;
 import library.view.PersonOverviewController;
 
@@ -79,6 +80,7 @@ public class Main extends Application {
 	public void showBooks(String buttonPressed) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		if (buttonPressed.equals("book")) {
+			System.out.println(buttonPressed);
 			loader.setLocation(Main.class.getResource("view/viewbooks.fxml"));
 		} else if (buttonPressed.equals("member")) {
 			loader.setLocation(Main.class.getResource("view/ViewMembers.fxml"));
@@ -89,7 +91,7 @@ public class Main extends Application {
 		Parent books = loader.load();
 		mainPanel.setCenter(books);
 
-		PersonOverviewController controller = loader.getController();
+		IViewController controller = loader.getController();
 		controller.setMainApp(this);
 	}
 
