@@ -55,10 +55,6 @@ public class PersonOverviewController implements IViewController {
 	 */
 	@FXML
 	private void initialize() {
-		// Initialize the person table with the two columns.
-//		firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-//		lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-
 		preJava8();
 		// Clear person details.
 		showDetails(null);

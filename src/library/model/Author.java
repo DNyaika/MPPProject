@@ -1,38 +1,38 @@
 package library.model;
 
 public class Author {
-	private String FirstName;
-	private String LastName;
-	private String Address;
-	private String Credentials;
-	private String Bio;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String credentials;
+	private String bio;
+
+	public Author(String firstName, String lastName, String address,
+			String credentials, String bio) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.credentials = credentials;
+		this.bio = bio;
+	}
 
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public String getCredentials() {
-		return Credentials;
+		return credentials;
 	}
 
 	public String getBio() {
-		return Bio;
-	}
-
-	public Author(String firstName, String lastName, String address, String credentials, String bio) {
-		super();
-		FirstName = firstName;
-		LastName = lastName;
-		Address = address;
-		Credentials = credentials;
-		Bio = bio;
+		return bio;
 	}
 }

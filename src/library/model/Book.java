@@ -3,62 +3,78 @@ package library.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Book implements Serializable  {
-	
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
+public class Book implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	private String title;
-	private String ISBN;
-	private List<Author> author;
-	private String copyNo;
-	private String numOfDays;
+	private final StringProperty title;
+	private final StringProperty ISBN;
+	private ObservableList<Author> authors;
+	private final StringProperty copyNo;
+	private final StringProperty numOfDays;
+	private final BooleanProperty isAvailable = new SimpleBooleanProperty(true);
 
-	private boolean isAvailable = true;
+	public Book(String title, String ISBN, String copyNo, String numOfDays,
+			ObservableList<Author> authors) {
+		this.title = new SimpleStringProperty(title);
+		this.ISBN = new SimpleStringProperty(ISBN);
+		this.authors = authors;
+		this.copyNo = new SimpleStringProperty(copyNo);
+		this.numOfDays = new SimpleStringProperty(numOfDays);
 
-	public boolean isAvailable() {
+	}
+
+	public BooleanProperty isAvailable() {
 		return isAvailable;
 	}
 
 	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
+		this.isAvailable.set(isAvailable);
+		;
 	}
 
-	public String getTitle() {
+	public StringProperty getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title.set(title);
 	}
 
-	public String getISBN() {
+	public StringProperty getISBN() {
 		return ISBN;
 	}
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		ISBN.set(iSBN);
 	}
 
-	public List<Author> getAuthor() {
-		return author;
+	public ObservableList<Author> getAuthors() {
+		return authors;
 	}
 
-	public void setAuthor(List<Author> author) {
-		this.author = author;
+	public void setAuthors(ObservableList<Author> authors) {
+		this.authors = authors;
 	}
 
-	public String getCopyNo() {
+	public StringProperty getCopyNo() {
 		return copyNo;
 	}
 
 	public void setCopyNo(String copyNo) {
-		this.copyNo = copyNo;
+		this.copyNo.set(copyNo);
 	}
 
-	public String getNumOfDays() {
+	public StringProperty getNumOfDays() {
 		return numOfDays;
 	}
 
 	public void setNumOfDays(String numOfDays) {
-		this.numOfDays = numOfDays;
+		this.numOfDays.set(numOfDays);
 	}
 }

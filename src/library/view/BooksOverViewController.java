@@ -17,25 +17,25 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import library.Main;
+import library.model.Book;
 
 public class BooksOverViewController implements IViewController {
 	@FXML
-	private TableView<Person> personTable;
+	private TableView<Book> bookTable;
 	@FXML
-	private TableColumn<Person, String> firstNameColumn;
-
+	private TableColumn<Book, String> titleColumn;
 	@FXML
-	private Label firstNameLabel;
+	private Label titleLabel;
 	@FXML
-	private Label lastNameLabel;
+	private Label ISBNLabel;
 	@FXML
-	private Label streetLabel;
+	private Label authorLabel;
 	@FXML
-	private Label postalCodeLabel;
+	private Label copyNoLabel;
 	@FXML
-	private Label cityLabel;
+	private Label numOfDaysLabel;
 	@FXML
-	private Label birthdayLabel;
+	private Label isAvailableLabel;
 
 	// Reference to the main application.
 	private Main mainApp;
@@ -63,9 +63,9 @@ public class BooksOverViewController implements IViewController {
 		// Clear person details.
 		showDetails(null);
 
-		// Listen for selection changes and show the person details when
+		// Listen for selection changes and show the book details when
 		// changed.
-		personTable
+		bookTable
 				.getSelectionModel()
 				.selectedItemProperty()
 				.addListener(
@@ -74,26 +74,15 @@ public class BooksOverViewController implements IViewController {
 	}
 
 	private void preJava8() {
-		firstNameColumn
-				.setCellValueFactory(new Callback<CellDataFeatures<Person, String>, ObservableValue<String>>() {
+		titleColumn
+				.setCellValueFactory(new Callback<CellDataFeatures<Book, String>, ObservableValue<String>>() {
 
 					@Override
 					public ObservableValue<String> call(
-							CellDataFeatures<Person, String> param) {
-						return param.getValue().firstNameProperty();
+							CellDataFeatures<Book, String> param) {
+						return param.getValue().getTitle();
 					}
 				});
-
-		// lastNameColumn
-		// .setCellValueFactory(new Callback<CellDataFeatures<Person, String>,
-		// ObservableValue<String>>() {
-		//
-		// @Override
-		// public ObservableValue<String> call(
-		// CellDataFeatures<Person, String> param) {
-		// return param.getValue().lastNameProperty();
-		// }
-		// });
 	}
 
 	/**
@@ -105,29 +94,32 @@ public class BooksOverViewController implements IViewController {
 		this.mainApp = mainApp;
 
 		// Add observable list data to the table
-		personTable.setItems(mainApp.getPersonData());
+		bookTable.setItems(mainApp.getBooks());
 	}
 
 	public void showDetails(Object obj) {
-		Person person = (Person) obj;
-		if (person != null) {
+		Book book = (Book) obj;
+		if (book != null) {
 			// Fill the labels with info from the person object.
-			firstNameLabel.setText(person.getFirstName());
-			lastNameLabel.setText(person.getLastName());
-			streetLabel.setText(person.getStreet());
-			postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
-			cityLabel.setText(person.getCity());
+			titleLabel.setText(book.getTitle().get());
+			ISBNLabel.setText(book.getISBN().get());
+			authorLabel.setText(book.getAuthors().get(0).getFirstName() + " "
+					+ book.getAuthors().get(0).getLastName());
+			numOfDaysLabel.setText(book.getNumOfDays().get());
+			isAvailableLabel.setText(new Boolean(book.isAvailable().get())
+					.toString());
+			copyNoLabel.setText(book.getCopyNo().get());
 
 			// TODO: We need a way to convert the birthday into a String!
 			// birthdayLabel.setText(...);
 		} else {
 			// Person is null, remove all the text.
-			firstNameLabel.setText("");
-			lastNameLabel.setText("");
-			streetLabel.setText("");
-			postalCodeLabel.setText("");
-			cityLabel.setText("");
-			birthdayLabel.setText("");
+			titleLabel.setText("");
+			ISBNLabel.setText("");
+			authorLabel.setText("");
+			numOfDaysLabel.setText("");
+			isAvailableLabel.setText("");
+			copyNoLabel.setText("");
 		}
 	}
 
@@ -136,9 +128,9 @@ public class BooksOverViewController implements IViewController {
 	 */
 	@FXML
 	public void delete() {
-		int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+		int selectedIndex = bookTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
-			personTable.getItems().remove(selectedIndex);
+			bookTable.getItems().remove(selectedIndex);
 		} else {
 			// Nothing selected.
 			Alert alert = new Alert(AlertType.WARNING);
@@ -170,12 +162,11 @@ public class BooksOverViewController implements IViewController {
 	 */
 	@FXML
 	public void edit() {
-		Person selectedPerson = personTable.getSelectionModel()
-				.getSelectedItem();
-		if (selectedPerson != null) {
-			boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+		Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+		if (selectedBook != null) {
+			boolean okClicked = mainApp.showBookEditDialog(selectedBook);
 			if (okClicked) {
-				showDetails(selectedPerson);
+				showDetails(selectedBook);
 			}
 
 		} else {
