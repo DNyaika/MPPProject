@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import library.Main;
+import library.model.Person;
 
 public class PersonOverviewController implements IViewController {
 	@FXML

@@ -12,12 +12,15 @@ import javafx.collections.ObservableList;
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private final StringProperty title;
-	private final StringProperty ISBN;
+	private StringProperty title = new SimpleStringProperty();
+	private StringProperty ISBN = new SimpleStringProperty();
 	private ObservableList<Author> authors;
-	private final StringProperty copyNo;
-	private final StringProperty numOfDays;
-	private final BooleanProperty isAvailable = new SimpleBooleanProperty(true);
+	private StringProperty copyNo = new SimpleStringProperty();
+	private StringProperty numOfDays = new SimpleStringProperty();
+	private BooleanProperty isAvailable = new SimpleBooleanProperty(true);
+
+	public Book() {
+	}
 
 	public Book(String title, String ISBN, String copyNo, String numOfDays,
 			ObservableList<Author> authors) {
@@ -76,5 +79,10 @@ public class Book implements Serializable {
 
 	public void setNumOfDays(String numOfDays) {
 		this.numOfDays.set(numOfDays);
+	}
+
+	public String toString() {
+		return "Num of days :" + numOfDays + ", " + "title: " + title + ", "
+				+ "Availability: " + isAvailable;
 	}
 }

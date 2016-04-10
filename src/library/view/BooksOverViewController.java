@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import library.Main;
 import library.model.Book;
+import library.model.Person;
 
 public class BooksOverViewController implements IViewController {
 	@FXML
@@ -149,10 +150,10 @@ public class BooksOverViewController implements IViewController {
 	 */
 	@FXML
 	public void add() {
-		Person tempPerson = new Person();
-		boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+		Book tempBook = new Book();
+		boolean okClicked = mainApp.showBookEditDialog(tempBook);
 		if (okClicked) {
-			mainApp.getPersonData().add(tempPerson);
+			mainApp.getBooks().add(tempBook);
 		}
 	}
 
