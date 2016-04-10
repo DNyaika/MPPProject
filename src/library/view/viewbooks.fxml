@@ -55,7 +55,8 @@
                   </GridPane>
                   <HBox alignment="BOTTOM_RIGHT" layoutX="179.0" layoutY="249.0" prefHeight="53.0" prefWidth="328.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="249.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Copy" />
+                        <Button mnemonicParsing="false" text="Checkout" />
+                        <Button mnemonicParsing="false" onAction="#addCopy" text="Copy" />
                         <Button mnemonicParsing="false" onAction="#add" text="New..." />
                         <Button mnemonicParsing="false" onAction="#edit" text="Edit..." />
                         <Button mnemonicParsing="false" onAction="#delete" text="Delete" />

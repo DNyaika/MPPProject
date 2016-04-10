@@ -181,4 +181,14 @@ public class BooksOverViewController implements IViewController {
 			alert.showAndWait();
 		}
 	}
+	
+	@FXML
+	public void addCopy() {
+		Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+		Book tempBook = new Book();
+		boolean okClicked = mainApp.showBookEditDialog(tempBook);
+		if (okClicked) {
+			mainApp.getBooks().add(tempBook);
+		}
+	}
 }
